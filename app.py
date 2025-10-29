@@ -14,6 +14,14 @@ from code.helper import prepare_symptoms_array
 import seaborn as sns
 import joblib
 
+# Configure Streamlit for mobile-friendly display
+st.set_page_config(
+    page_title="Multiple Disease Prediction",
+    page_icon="🏥",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # loading the models with error handling
 import warnings
 warnings.filterwarnings('ignore')
@@ -37,6 +45,43 @@ except Exception as e:
         st.error("⚠️ Some prediction models are temporarily unavailable. Please try again later.")
     models_loaded = False
 
+# Add mobile-friendly CSS
+st.markdown("""
+<style>
+    /* Mobile responsive adjustments */
+    .main .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        max-width: 100%;
+    }
+    
+    /* Improve mobile sidebar */
+    .sidebar .sidebar-content {
+        width: 100%;
+    }
+    
+    /* Better mobile button styling */
+    .stButton > button {
+        width: 100%;
+        margin: 0.25rem 0;
+    }
+    
+    /* Mobile-friendly selectbox */
+    .stSelectbox {
+        margin-bottom: 1rem;
+    }
+    
+    /* Responsive text */
+    @media (max-width: 768px) {
+        .stMarkdown h1 {
+            font-size: 1.5rem;
+        }
+        .stMarkdown h2 {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # sidebar
 with st.sidebar:
