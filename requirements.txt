@@ -3,3 +3,10 @@ pandas
 numpy
 scikit-learn
 joblib
+plotly
+matplotlib
+streamlit-option-menu
+Pillow
+seaborn
+xgboost
+xgboost
