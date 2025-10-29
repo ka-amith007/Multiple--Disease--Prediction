@@ -14,25 +14,24 @@ from code.helper import prepare_symptoms_array
 import seaborn as sns
 import joblib
 
-# loading the models
-diabetes_model = joblib.load("models/diabetes_model.sav")
-heart_model = joblib.load("models/heart_disease_model.sav")
-parkinson_model = joblib.load("models/parkinsons_model.sav")
-# Load the lung cancer prediction model
-lung_cancer_model = joblib.load('models/lung_cancer_model.sav')
-
-# Load the pre-trained model
-breast_cancer_model = joblib.load('models/breast_cancer.sav')
-
-# Load the pre-trained model
-chronic_disease_model = joblib.load('models/chronic_model.sav')
-
-# Load the hepatitis prediction model
-hepatitis_model = joblib.load('models/hepititisc_model.sav')
-
-
-liver_model = joblib.load('models/liver_model.sav')# Load the lung cancer prediction model
-lung_cancer_model = joblib.load('models/lung_cancer_model.sav')
+# loading the models with error handling
+try:
+    diabetes_model = joblib.load("models/diabetes_model.sav")
+    heart_model = joblib.load("models/heart_disease_model.sav")
+    parkinson_model = joblib.load("models/parkinsons_model.sav")
+    lung_cancer_model = joblib.load('models/lung_cancer_model.sav')
+    breast_cancer_model = joblib.load('models/breast_cancer.sav')
+    chronic_disease_model = joblib.load('models/chronic_model.sav')
+    hepatitis_model = joblib.load('models/hepititisc_model.sav')
+    liver_model = joblib.load('models/liver_model.sav')
+    # Using liver model for jaundice prediction as they are related
+    jaundice_model = liver_model
+    
+    models_loaded = True
+except Exception as e:
+    st.error(f"Error loading models: {str(e)}")
+    st.error("This may be due to version compatibility issues. Please contact the developer.")
+    models_loaded = False
 
 
 # sidebar
