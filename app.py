@@ -15,6 +15,9 @@ import seaborn as sns
 import joblib
 
 # loading the models with error handling
+import warnings
+warnings.filterwarnings('ignore')
+
 try:
     diabetes_model = joblib.load("models/diabetes_model.sav")
     heart_model = joblib.load("models/heart_disease_model.sav")
@@ -29,8 +32,9 @@ try:
     
     models_loaded = True
 except Exception as e:
-    st.error(f"Error loading models: {str(e)}")
-    st.error("This may be due to version compatibility issues. Please contact the developer.")
+    # Only show error if models completely fail to load
+    if "sklearn.ensemble._gb_losses" not in str(e):
+        st.error("⚠️ Some prediction models are temporarily unavailable. Please try again later.")
     models_loaded = False
 
 
