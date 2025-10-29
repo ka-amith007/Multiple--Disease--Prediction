@@ -828,18 +828,30 @@ if selected == 'Chronic Kidney prediction':
             'ane': [ane]
         })
 
-        # Perform prediction
-        kidney_prediction = chronic_disease_model.predict(user_input)
-        # Display result
-        if kidney_prediction[0] == 1:
-            image = Image.open('positive.jpg')
-            st.image(image, caption='')
-            kidney_prediction_dig = "we are really sorry to say but it seems like you have kidney disease."
-        else:
-            image = Image.open('negative.jpg')
-            st.image(image, caption='')
-            kidney_prediction_dig = "Congratulation , You don't have kidney disease."
-        st.success(name+' , ' + kidney_prediction_dig)
+        # Perform prediction with error handling
+        try:
+            if models_loaded and 'chronic_disease_model' in globals():
+                kidney_prediction = chronic_disease_model.predict(user_input)
+                # Display result
+                if kidney_prediction[0] == 1:
+                    try:
+                        image = Image.open('positive.jpg')
+                        st.image(image, caption='')
+                    except:
+                        pass
+                    kidney_prediction_dig = "we are really sorry to say but it seems like you have kidney disease."
+                else:
+                    try:
+                        image = Image.open('negative.jpg')
+                        st.image(image, caption='')
+                    except:
+                        pass
+                    kidney_prediction_dig = "Congratulation , You don't have kidney disease."
+                st.success(name+' , ' + kidney_prediction_dig)
+            else:
+                st.error("⚠️ Chronic kidney disease model is temporarily unavailable. Please try again later.")
+        except Exception as e:
+            st.error("⚠️ Unable to make prediction. Please check your inputs and try again.")
 
 
 
@@ -942,16 +954,27 @@ if selected == 'Breast Cancer Prediction':
             'fractal_dimension_worst': [fractal_dimension_worst],
         })
 
-        # Perform prediction
-        breast_cancer_prediction = breast_cancer_model.predict(user_input)
-        # Display result
-        if breast_cancer_prediction[0] == 1:
-            image = Image.open('positive.jpg')
-            st.image(image, caption='')
-            breast_cancer_result = "The model predicts that you have Breast Cancer."
-        else:
-            image = Image.open('negative.jpg')
-            st.image(image, caption='')
-            breast_cancer_result = "The model predicts that you don't have Breast Cancer."
-
-        st.success(breast_cancer_result)
+        # Perform prediction with error handling
+        try:
+            if models_loaded and 'breast_cancer_model' in globals():
+                breast_cancer_prediction = breast_cancer_model.predict(user_input)
+                # Display result
+                if breast_cancer_prediction[0] == 1:
+                    try:
+                        image = Image.open('positive.jpg')
+                        st.image(image, caption='')
+                    except:
+                        pass
+                    breast_cancer_result = "The model predicts that you have Breast Cancer."
+                else:
+                    try:
+                        image = Image.open('negative.jpg')
+                        st.image(image, caption='')
+                    except:
+                        pass
+                    breast_cancer_result = "The model predicts that you don't have Breast Cancer."
+                st.success(breast_cancer_result)
+            else:
+                st.error("⚠️ Breast cancer model is temporarily unavailable. Please try again later.")
+        except Exception as e:
+            st.error("⚠️ Unable to make prediction. Please check your inputs and try again.")
