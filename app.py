@@ -1,24 +1,14 @@
 import streamlit as st
-try:
-    import plotly.express as px
-    from plotly.subplots import make_subplots
-    import plotly.graph_objects as go
-    import plotly.figure_factory as ff
-except ImportError as e:
-    st.error(f"Error importing plotly: {e}")
-    st.stop()
-
+import plotly.express as px
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import pandas as pd
-try:
-    from streamlit_option_menu import option_menu
-except ImportError:
-    st.error("streamlit-option-menu not installed")
-    st.stop()
-
+from streamlit_option_menu import option_menu
 import pickle
 from PIL import Image
 import numpy as np
+import plotly.figure_factory as ff
 from code.DiseaseModel import DiseaseModel
 from code.helper import prepare_symptoms_array
 import seaborn as sns
