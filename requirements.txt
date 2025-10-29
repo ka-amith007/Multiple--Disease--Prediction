@@ -1,11 +1,5 @@
 streamlit
-plotly
-matplotlib
 pandas
 numpy
-streamlit-option-menu
-Pillow
-seaborn
+scikit-learn
 joblib
-scikit-learn<1.5.0
-xgboost
